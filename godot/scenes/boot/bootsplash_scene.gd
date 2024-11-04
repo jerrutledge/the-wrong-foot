@@ -34,3 +34,8 @@ func _fade_out():
 
 func _change_scene():
 	get_tree().change_scene_to_packed(next_scene)
+
+func _input(event):
+	if event is InputEventKey:
+		if event.pressed:
+			_change_scene()
