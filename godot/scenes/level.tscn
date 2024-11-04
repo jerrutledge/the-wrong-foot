@@ -1,43 +1,396 @@
-[gd_scene load_steps=5 format=3 uid="uid://c5hgqn5ue4lp7"]
+[gd_scene load_steps=20 format=3 uid="uid://c5hgqn5ue4lp7"]
 
 [ext_resource type="Script" path="res://src/level.gd" id="1_yodyt"]
+[ext_resource type="Script" path="res://src/obstacle.gd" id="2_n21rm"]
+[ext_resource type="PackedScene" uid="uid://dlq71w3cuhgqq" path="res://assets/3d/food/bread.glb" id="3_n78q6"]
+[ext_resource type="PackedScene" uid="uid://cvcwgox25ygkc" path="res://assets/3d/food/cake.glb" id="4_vk303"]
+[ext_resource type="PackedScene" uid="uid://c6jcrns2j1t8a" path="res://assets/3d/food/carton.glb" id="5_03cik"]
+[ext_resource type="PackedScene" uid="uid://cljxuxbqhd53u" path="res://assets/3d/food/cupcake.glb" id="6_erq13"]
+[ext_resource type="PackedScene" uid="uid://bc0joe14jsbfk" path="res://assets/3d/food/fish.glb" id="7_056fr"]
+[ext_resource type="PackedScene" uid="uid://uk40nhva347n" path="res://assets/3d/food/donut.glb" id="8_8jt7h"]
+[ext_resource type="PackedScene" uid="uid://c3ckrljcyjady" path="res://assets/3d/food/donut-sprinkles.glb" id="9_ltjeb"]
+[ext_resource type="PackedScene" uid="uid://d4cyqge0xqq1h" path="res://assets/3d/food/donut-chocolate.glb" id="10_rgn7m"]
+[ext_resource type="PackedScene" uid="uid://btiado24tds0j" path="res://assets/3d/food/ginger-bread.glb" id="11_og3yn"]
+[ext_resource type="PackedScene" uid="uid://bn8cyojwory6u" path="res://assets/3d/food/fries.glb" id="12_jnrde"]
+[ext_resource type="PackedScene" uid="uid://bldlgustyx0xm" path="res://assets/3d/food/loaf-round.glb" id="13_wrdoh"]
+[ext_resource type="PackedScene" uid="uid://cjynphxb5dnyo" path="res://assets/3d/food/mushroom.glb" id="14_fp2jf"]
+[ext_resource type="PackedScene" uid="uid://cy7g2hdgojfac" path="res://assets/3d/food/pumpkin.glb" id="14_pjfei"]
+[ext_resource type="PackedScene" uid="uid://b8yoxwnycssyd" path="res://assets/3d/food/pizza.glb" id="15_guuyh"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_y42xv"]
-size = Vector3(4, 500, 1)
+size = Vector3(4, 1000, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_n1wgp"]
 size = Vector3(500, 50, 500)
 
-[sub_resource type="PrismMesh" id="PrismMesh_u6pnj"]
-size = Vector3(1, 30, 1)
+[sub_resource type="SphereShape3D" id="SphereShape3D_mquh2"]
 
 [node name="Level" type="Node3D"]
 script = ExtResource("1_yodyt")
 
-[node name="tallcube" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30.6409, 146.42, -44.1248)
-mesh = SubResource("BoxMesh_y42xv")
-
 [node name="tallcube2" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -57.9786, 539.403, -44.1248)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 500, -1)
 mesh = SubResource("BoxMesh_y42xv")
 
-[node name="Label3D" type="Label3D" parent="tallcube2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 252.248, 0)
-pixel_size = 0.1
-text = "FINISH"
+[node name="tallcube3" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 500, -1)
+mesh = SubResource("BoxMesh_y42xv")
 
 [node name="Finish" type="Area3D" parent="."]
 collision_layer = 0
 collision_mask = 4
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Finish"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 814.035, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 163.969, 0)
 shape = SubResource("BoxShape3D_n1wgp")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.7969, 6.43104, -3.1662)
-mesh = SubResource("PrismMesh_u6pnj")
+[node name="Label3D" type="Label3D" parent="Finish/CollisionShape3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -28.01, -6)
+pixel_size = 0.1
+text = "FINISH"
+
+[node name="Obstacles" type="Node3D" parent="."]
+
+[node name="Obstacle" type="StaticBody3D" parent="Obstacles"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.3298, 24.0087, 0)
+script = ExtResource("2_n21rm")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Obstacles/Obstacle"]
+shape = SubResource("SphereShape3D_mquh2")
+
+[node name="bread2" parent="Obstacles/Obstacle" instance=ExtResource("3_n78q6")]
+transform = Transform3D(1.93975, 0, 0, 0, 1.93975, 0, 0, 0, 1.93975, 0, 0, 0)
+
+[node name="Obstacle2" type="StaticBody3D" parent="Obstacles"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.77745, 3.26744, 0)
+script = ExtResource("2_n21rm")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Obstacles/Obstacle2"]
+shape = SubResource("SphereShape3D_mquh2")
+
+[node name="cake" parent="Obstacles/Obstacle2" instance=ExtResource("4_vk303")]
+transform = Transform3D(1.16351, 0, 0, 0, 1.16351, 0, 0, 0, 1.16351, 0, -0.0780139, 0)
+
+[node name="Obstacle3" type="StaticBody3D" parent="Obstacles"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.31386, 29.9063, 0)
+script = ExtResource("2_n21rm")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Obstacles/Obstacle3"]
+shape = SubResource("SphereShape3D_mquh2")
+
+[node name="carton2" parent="Obstacles/Obstacle3" instance=ExtResource("5_03cik")]
+transform = Transform3D(1.4774, 0, 0, 0, 1.4774, 0, 0, 0, 1.4774, 0, -0.430299, 0)
+
+[node name="Obstacle14" type="StaticBody3D" parent="Obstacles"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.99707, 29.9063, 0)
+script = ExtResource("2_n21rm")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Obstacles/Obstacle14"]
+shape = SubResource("SphereShape3D_mquh2")
+
+[node name="carton2" parent="Obstacles/Obstacle14" instance=ExtResource("5_03cik")]
+transform = Transform3D(1.4774, 0, 0, 0, 1.4774, 0, 0, 0, 1.4774, 0, -0.430299, 0)
+
+[node name="Obstacle15" type="StaticBody3D" parent="Obstacles"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.58802, 29.9063, 0)
+script = ExtResource("2_n21rm")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Obstacles/Obstacle15"]
+shape = SubResource("SphereShape3D_mquh2")
+
+[node name="carton2" parent="Obstacles/Obstacle15" instance=ExtResource("5_03cik")]
+transform = Transform3D(1.4774, 0, 0, 0, 1.4774, 0, 0, 0, 1.4774, 0, -0.430299, 0)
+
+[node name="Obstacle4" type="StaticBody3D" parent="Obstacles"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.72568, 46.4727, 0)
+script = ExtResource("2_n21rm")
+
+[node name="cupcake2" parent="Obstacles/Obstacle4" instance=ExtResource("6_erq13")]
+transform = Transform3D(2.14894, 0, 0, 0, 2.14894, 0, 0, 0, 2.14894, 0, -0.320544, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Obstacles/Obstacle4"]
+shape = SubResource("SphereShape3D_mquh2")
+
+[node name="Obstacle16" type="StaticBody3D" parent="Obstacles"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.00969, 48.1409, 0)
+script = ExtResource("2_n21rm")
+
+[node name="cupcake2" parent="Obstacles/Obstacle16" instance=ExtResource("6_erq13")]
+transform = Transform3D(2.14894, 0, 0, 0, 2.14894, 0, 0, 0, 2.14894, 0, -0.320544, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Obstacles/Obstacle16"]
+shape = SubResource("SphereShape3D_mquh2")
+
+[node name="Obstacle17" type="StaticBody3D" parent="Obstacles"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.89966, 50.6108, 0)
+script = ExtResource("2_n21rm")
+
+[node name="cupcake2" parent="Obstacles/Obstacle17" instance=ExtResource("6_erq13")]
+transform = Transform3D(2.14894, 0, 0, 0, 2.14894, 0, 0, 0, 2.14894, 0, -0.320544, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Obstacles/Obstacle17"]
+shape = SubResource("SphereShape3D_mquh2")
+
+[node name="Obstacle5" type="StaticBody3D" parent="Obstacles"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.12336, 19.0429, 0)
+script = ExtResource("2_n21rm")
+
+[node name="fish2" parent="Obstacles/Obstacle5" instance=ExtResource("7_056fr")]
+transform = Transform3D(0.209906, 0, 1.7093, 0, 1.72214, 0, -1.7093, 0, 0.209906, 0, -0.239584, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Obstacles/Obstacle5"]
+shape = SubResource("SphereShape3D_mquh2")
+
+[node name="Obstacle6" type="StaticBody3D" parent="Obstacles"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.2557, 55.003, 0)
+script = ExtResource("2_n21rm")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Obstacles/Obstacle6"]
+shape = SubResource("SphereShape3D_mquh2")
+
+[node name="donut2" parent="Obstacles/Obstacle6" instance=ExtResource("8_8jt7h")]
+transform = Transform3D(3.6086, 0, 0, 0, 3.6086, 0, 0, 0, 3.6086, 0, -0.139, 0)
+
+[node name="Obstacle7" type="StaticBody3D" parent="Obstacles"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.58304, 56.5556, 0)
+script = ExtResource("2_n21rm")
+
+[node name="donut-sprinkles2" parent="Obstacles/Obstacle7" instance=ExtResource("9_ltjeb")]
+transform = Transform3D(3.27507, 0, 0, 0, 3.27507, 0, 0, 0, 3.27507, 0, -0.128387, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Obstacles/Obstacle7"]
+shape = SubResource("SphereShape3D_mquh2")
+
+[node name="Obstacle18" type="StaticBody3D" parent="Obstacles"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.46052, 58.9882, 0)
+script = ExtResource("2_n21rm")
+
+[node name="donut-sprinkles2" parent="Obstacles/Obstacle18" instance=ExtResource("9_ltjeb")]
+transform = Transform3D(3.27507, 0, 0, 0, 3.27507, 0, 0, 0, 3.27507, 0, -0.128387, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Obstacles/Obstacle18"]
+shape = SubResource("SphereShape3D_mquh2")
+
+[node name="Obstacle19" type="StaticBody3D" parent="Obstacles"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.60564, 57.585, 0)
+script = ExtResource("2_n21rm")
+
+[node name="donut-sprinkles2" parent="Obstacles/Obstacle19" instance=ExtResource("9_ltjeb")]
+transform = Transform3D(3.27507, 0, 0, 0, 3.27507, 0, 0, 0, 3.27507, 0, -0.128387, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Obstacles/Obstacle19"]
+shape = SubResource("SphereShape3D_mquh2")
+
+[node name="Obstacle8" type="StaticBody3D" parent="Obstacles"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.78756, 61.0917, 0)
+script = ExtResource("2_n21rm")
+
+[node name="donut-chocolate2" parent="Obstacles/Obstacle8" instance=ExtResource("10_rgn7m")]
+transform = Transform3D(3.71305, 0, 0, 0, 3.71305, 0, 0, 0, 3.71305, 0, -0.161835, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Obstacles/Obstacle8"]
+shape = SubResource("SphereShape3D_mquh2")
+
+[node name="Obstacle9" type="StaticBody3D" parent="Obstacles"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.56153, 61.1625, 0)
+script = ExtResource("2_n21rm")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Obstacles/Obstacle9"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.775032, 3.3115, 0)
+shape = SubResource("SphereShape3D_mquh2")
+
+[node name="ginger-bread2" parent="Obstacles/Obstacle9" instance=ExtResource("11_og3yn")]
+transform = Transform3D(3.27365, 0, 0, 0, 3.27365, 0, 0, 0, 3.27365, 0.775032, 3.28633, 0)
+
+[node name="Obstacle10" type="StaticBody3D" parent="Obstacles"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.41677, 66.2829, 0)
+script = ExtResource("2_n21rm")
+
+[node name="fries3" parent="Obstacles/Obstacle10" instance=ExtResource("12_jnrde")]
+transform = Transform3D(2.35753, 0, 0, 0, 2.35753, 0, 0, 0, 2.35753, 0, 10.8314, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Obstacles/Obstacle10"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 11.2732, 0)
+shape = SubResource("SphereShape3D_mquh2")
+
+[node name="fries4" parent="Obstacles/Obstacle10" instance=ExtResource("12_jnrde")]
+transform = Transform3D(2.35753, 0, 0, 0, 2.35753, 0, 0, 0, 2.35753, 7.1162, 17.8771, 0)
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Obstacles/Obstacle10"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.1162, 18.3189, 0)
+shape = SubResource("SphereShape3D_mquh2")
+
+[node name="fries5" parent="Obstacles/Obstacle10" instance=ExtResource("12_jnrde")]
+transform = Transform3D(0.658796, 2.26361, 0, -2.26361, 0.658796, 0, 0, 0, 2.35753, -2.75065, 26.2538, 0)
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="Obstacles/Obstacle10"]
+transform = Transform3D(0.279444, 0.960162, 0, -0.960162, 0.279444, 0, 0, 0, 1, -2.32648, 26.3772, 0)
+shape = SubResource("SphereShape3D_mquh2")
+
+[node name="fries6" parent="Obstacles/Obstacle10" instance=ExtResource("12_jnrde")]
+transform = Transform3D(0.658796, 2.26361, 0, -2.26361, 0.658796, 0, 0, 0, 2.35753, 1.16259, 31.2851, 0)
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="Obstacles/Obstacle10"]
+transform = Transform3D(0.279444, 0.960162, 0, -0.960162, 0.279444, 0, 0, 0, 1, 1.58677, 31.4085, 0)
+shape = SubResource("SphereShape3D_mquh2")
+
+[node name="Obstacle20" type="StaticBody3D" parent="Obstacles"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.53763, 68.2635, 0)
+script = ExtResource("2_n21rm")
+
+[node name="fries3" parent="Obstacles/Obstacle20" instance=ExtResource("12_jnrde")]
+transform = Transform3D(2.35753, 0, 0, 0, 2.35753, 0, 0, 0, 2.35753, 0, 10.8314, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Obstacles/Obstacle20"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 11.2732, 0)
+shape = SubResource("SphereShape3D_mquh2")
+
+[node name="fries4" parent="Obstacles/Obstacle20" instance=ExtResource("12_jnrde")]
+transform = Transform3D(2.35753, 0, 0, 0, 2.35753, 0, 0, 0, 2.35753, 7.1162, 17.8772, 0)
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Obstacles/Obstacle20"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.1162, 18.3189, 0)
+shape = SubResource("SphereShape3D_mquh2")
+
+[node name="fries5" parent="Obstacles/Obstacle20" instance=ExtResource("12_jnrde")]
+transform = Transform3D(0.658796, 2.26361, 0, -2.26361, 0.658796, 0, 0, 0, 2.35753, -0.0412493, 25.9028, 0)
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="Obstacles/Obstacle20"]
+transform = Transform3D(0.279444, 0.960162, 0, -0.960162, 0.279444, 0, 0, 0, 1, 0.382916, 26.0262, 0)
+shape = SubResource("SphereShape3D_mquh2")
+
+[node name="fries6" parent="Obstacles/Obstacle20" instance=ExtResource("12_jnrde")]
+transform = Transform3D(0.658796, 2.26361, 0, -2.26361, 0.658796, 0, 0, 0, 2.35753, 3.872, 30.9341, 0)
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="Obstacles/Obstacle20"]
+transform = Transform3D(0.279444, 0.960162, 0, -0.960162, 0.279444, 0, 0, 0, 1, 4.29616, 31.0576, 0)
+shape = SubResource("SphereShape3D_mquh2")
+
+[node name="Obstacle21" type="StaticBody3D" parent="Obstacles"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.71031, 70.247, 0)
+script = ExtResource("2_n21rm")
+
+[node name="fries3" parent="Obstacles/Obstacle21" instance=ExtResource("12_jnrde")]
+transform = Transform3D(2.35753, 0, 0, 0, 2.35753, 0, 0, 0, 2.35753, 0, 10.8314, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Obstacles/Obstacle21"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 11.2732, 0)
+shape = SubResource("SphereShape3D_mquh2")
+
+[node name="fries4" parent="Obstacles/Obstacle21" instance=ExtResource("12_jnrde")]
+transform = Transform3D(2.35753, 0, 0, 0, 2.35753, 0, 0, 0, 2.35753, 7.1162, 17.8771, 0)
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Obstacles/Obstacle21"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.1162, 18.3189, 0)
+shape = SubResource("SphereShape3D_mquh2")
+
+[node name="fries5" parent="Obstacles/Obstacle21" instance=ExtResource("12_jnrde")]
+transform = Transform3D(0.658796, 2.26361, 0, -2.26361, 0.658796, 0, 0, 0, 2.35753, 2.70813, 25.5996, 0)
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="Obstacles/Obstacle21"]
+transform = Transform3D(0.279444, 0.960162, 0, -0.960162, 0.279444, 0, 0, 0, 1, 3.1323, 25.723, 0)
+shape = SubResource("SphereShape3D_mquh2")
+
+[node name="fries6" parent="Obstacles/Obstacle21" instance=ExtResource("12_jnrde")]
+transform = Transform3D(0.658796, 2.26361, 0, -2.26361, 0.658796, 0, 0, 0, 2.35753, 6.62138, 30.6309, 0)
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="Obstacles/Obstacle21"]
+transform = Transform3D(0.279444, 0.960162, 0, -0.960162, 0.279444, 0, 0, 0, 1, 7.04555, 30.7543, 0)
+shape = SubResource("SphereShape3D_mquh2")
+
+[node name="Obstacle11" type="StaticBody3D" parent="Obstacles"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.97463, 94.2041, 0)
+script = ExtResource("2_n21rm")
+
+[node name="loaf-round2" parent="Obstacles/Obstacle11" instance=ExtResource("13_wrdoh")]
+transform = Transform3D(1.4623, 0, 0, 0, 1.4623, 0, 0, 0, 1.4623, 2.40385, 12.3978, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Obstacles/Obstacle11"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.40385, 12.5783, 0)
+shape = SubResource("SphereShape3D_mquh2")
+
+[node name="loaf-round3" parent="Obstacles/Obstacle11" instance=ExtResource("13_wrdoh")]
+transform = Transform3D(1.4623, 0, 0, 0, 1.4623, 0, 0, 0, 1.4623, -5.36674, 14.0749, 0)
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Obstacles/Obstacle11"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.36674, 14.2554, 0)
+shape = SubResource("SphereShape3D_mquh2")
+
+[node name="Obstacle12" type="StaticBody3D" parent="Obstacles"]
+transform = Transform3D(3.27207, 0, 0, 0, 3.27207, 0, 0, 0, 3.27207, -0.239, 71.919, 0)
+script = ExtResource("2_n21rm")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Obstacles/Obstacle12"]
+shape = SubResource("SphereShape3D_mquh2")
+
+[node name="pumpkin2" parent="Obstacles/Obstacle12" instance=ExtResource("14_pjfei")]
+transform = Transform3D(1.80165, 0, 0, 0, 1.80165, 0, 0, 0, 1.80165, 0, 0, 0)
+
+[node name="Obstacle22" type="StaticBody3D" parent="Obstacles"]
+transform = Transform3D(2.22037, 0, 0, 0, 2.22037, 0, 0, 0, 2.22037, -0.239, 116.092, 0)
+script = ExtResource("2_n21rm")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Obstacles/Obstacle22"]
+shape = SubResource("SphereShape3D_mquh2")
+
+[node name="mushroom2" parent="Obstacles/Obstacle22" instance=ExtResource("14_fp2jf")]
+transform = Transform3D(5.94964, 0, 0, 0, 5.94964, 0, 0, 0, 5.94964, 0, -0.455162, 0)
+
+[node name="Obstacle23" type="StaticBody3D" parent="Obstacles"]
+transform = Transform3D(3.27207, 0, 0, 0, 3.27207, 0, 0, 0, 3.27207, 5.439, 116.092, 0)
+script = ExtResource("2_n21rm")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Obstacles/Obstacle23"]
+shape = SubResource("SphereShape3D_mquh2")
+
+[node name="mushroom2" parent="Obstacles/Obstacle23" instance=ExtResource("14_fp2jf")]
+transform = Transform3D(5.94964, 0, 0, 0, 5.94964, 0, 0, 0, 5.94964, 0, -0.455162, 0)
+
+[node name="Obstacle24" type="StaticBody3D" parent="Obstacles"]
+transform = Transform3D(3.27207, 0, 0, 0, 3.27207, 0, 0, 0, 3.27207, -5.494, 116.092, 0)
+script = ExtResource("2_n21rm")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Obstacles/Obstacle24"]
+shape = SubResource("SphereShape3D_mquh2")
+
+[node name="mushroom2" parent="Obstacles/Obstacle24" instance=ExtResource("14_fp2jf")]
+transform = Transform3D(5.94964, 0, 0, 0, 5.94964, 0, 0, 0, 5.94964, 0, -0.455162, 0)
+
+[node name="Obstacle13" type="StaticBody3D" parent="Obstacles"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 94.8435, 0)
+script = ExtResource("2_n21rm")
+
+[node name="pizza" parent="Obstacles/Obstacle13" instance=ExtResource("15_guuyh")]
+transform = Transform3D(1.16852, 0, 0, 0, 1.16852, 0, 0, 0, 1.16852, 2.40385, 12.5783, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Obstacles/Obstacle13"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.40385, 12.5783, 0)
+shape = SubResource("SphereShape3D_mquh2")
+
+[node name="pizza2" parent="Obstacles/Obstacle13" instance=ExtResource("15_guuyh")]
+transform = Transform3D(1.16852, 0, 0, 0, 1.16852, 0, 0, 0, 1.16852, -5.36674, 14.2554, 0)
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Obstacles/Obstacle13"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.36674, 14.2554, 0)
+shape = SubResource("SphereShape3D_mquh2")
+
+[node name="Obstacle25" type="StaticBody3D" parent="Obstacles"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 94.8435, 0)
+script = ExtResource("2_n21rm")
+
+[node name="pizza" parent="Obstacles/Obstacle25" instance=ExtResource("15_guuyh")]
+transform = Transform3D(1.16852, 0, 0, 0, 1.16852, 0, 0, 0, 1.16852, 2.40385, 12.5783, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Obstacles/Obstacle25"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.40385, 12.5783, 0)
+shape = SubResource("SphereShape3D_mquh2")
+
+[node name="pizza2" parent="Obstacles/Obstacle25" instance=ExtResource("15_guuyh")]
+transform = Transform3D(1.16852, 0, 0, 0, 1.16852, 0, 0, 0, 1.16852, -5.36674, 14.2554, 0)
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Obstacles/Obstacle25"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.36674, 14.2554, 0)
+shape = SubResource("SphereShape3D_mquh2")
 
 [connection signal="area_entered" from="Finish" to="." method="_on_finish_area_entered"]
 [connection signal="body_entered" from="Finish" to="." method="_on_finish_body_entered"]

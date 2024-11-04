@@ -7,8 +7,8 @@ extends Node3D
 @onready var animation_player: AnimationPlayer = $Camera3D/AnimationPlayer
 
 var level_speed : float = 0.0
-@export var max_speed := 160.0
-@export var accel := 2.0
+@export var max_speed := 110.0
+@export var accel := 5.0
 @export var bump_speed := -3.0
 
 @export var started := false
