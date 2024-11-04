@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://c5hgqn5ue4lp7"]
+[gd_scene load_steps=5 format=3 uid="uid://c5hgqn5ue4lp7"]
 
 [ext_resource type="Script" path="res://src/level.gd" id="1_yodyt"]
 
@@ -8,6 +8,9 @@ size = Vector3(4, 500, 1)
 [sub_resource type="BoxShape3D" id="BoxShape3D_n1wgp"]
 size = Vector3(500, 50, 500)
 
+[sub_resource type="PrismMesh" id="PrismMesh_u6pnj"]
+size = Vector3(1, 30, 1)
+
 [node name="Level" type="Node3D"]
 script = ExtResource("1_yodyt")
 
@@ -16,8 +19,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30.6409, 146.42, -44.1248)
 mesh = SubResource("BoxMesh_y42xv")
 
 [node name="tallcube2" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -57.3774, 573.37, -44.1248)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -57.9786, 539.403, -44.1248)
 mesh = SubResource("BoxMesh_y42xv")
+
+[node name="Label3D" type="Label3D" parent="tallcube2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 252.248, 0)
+pixel_size = 0.1
+text = "FINISH"
 
 [node name="Finish" type="Area3D" parent="."]
 collision_layer = 0
@@ -26,6 +34,10 @@ collision_mask = 4
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Finish"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 814.035, 0)
 shape = SubResource("BoxShape3D_n1wgp")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.7969, 6.43104, -3.1662)
+mesh = SubResource("PrismMesh_u6pnj")
 
 [connection signal="area_entered" from="Finish" to="." method="_on_finish_area_entered"]
 [connection signal="body_entered" from="Finish" to="." method="_on_finish_body_entered"]
