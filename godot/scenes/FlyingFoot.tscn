@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://dtw8ubfn3rkrj"]
+
+[ext_resource type="Environment" uid="uid://cjhgadculb6i2" path="res://default_env.tres" id="1_epn1i"]
+[ext_resource type="PackedScene" uid="uid://cqwbrl83wbwg0" path="res://assets/3d/foot.glb" id="2_4d03a"]
+[ext_resource type="Script" path="res://src/foot.gd" id="2_i6b0q"]
+
+[node name="Node3D" type="Node3D"]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.496126, 0.868251, 0, -0.868251, 0.496126, 6.58227, 0, 4.84894)
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4.92536)
+environment = ExtResource("1_epn1i")
+current = true
+
+[node name="foot" parent="." instance=ExtResource("2_4d03a")]
+transform = Transform3D(-1.31134e-08, -0.3, 0, 0.3, -1.31134e-08, 0, 0, 0, 0.3, 0, 0, 0)
+script = ExtResource("2_i6b0q")
