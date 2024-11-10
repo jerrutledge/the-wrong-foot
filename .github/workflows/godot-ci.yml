@@ -5,6 +5,7 @@ on: [push, pull_request]
 env:
   GODOT_VERSION: "4.3"
   GODOT_STATUS: "stable"
+  BUTLER_API_KEY: ${{ secrets.BUTLER_API_KEY }}
 jobs:
   import-assets:
     runs-on: ubuntu-latest
