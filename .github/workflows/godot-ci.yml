@@ -73,7 +73,6 @@ jobs:
       - name: Deploy to Itch.io (Windows)
         uses: manleydev/butler-publish-itchio-action@master
         env:
-          BUTLER_API_KEY: ${{ secrets.BUTLER_API_KEY }}
           CHANNEL: linux
           ITCH_GAME: ${{ secrets.ITCHIO_GAME }}
           ITCH_USER: ${{ secrets.ITCHIO_USERNAME }}
@@ -90,7 +89,6 @@ jobs:
       - name: Deploy to Itch.io (Windows)
         uses: manleydev/butler-publish-itchio-action@master
         env:
-          BUTLER_API_KEY: ${{ secrets.BUTLER_API_KEY }}
           CHANNEL: windows
           ITCH_GAME: ${{ secrets.ITCHIO_GAME }}
           ITCH_USER: ${{ secrets.ITCHIO_USERNAME }}
@@ -107,7 +105,6 @@ jobs:
       - name: Deploy to Itch.io (MacOS)
         uses: manleydev/butler-publish-itchio-action@master
         env:
-          BUTLER_API_KEY: ${{ secrets.BUTLER_API_KEY }}
           CHANNEL: mac
           ITCH_GAME: ${{ secrets.ITCHIO_GAME }}
           ITCH_USER: ${{ secrets.ITCHIO_USERNAME }}
@@ -124,7 +121,6 @@ jobs:
       - name: Deploy to Itch.io (HTML5)
         uses: manleydev/butler-publish-itchio-action@master
         env:
-          BUTLER_API_KEY: ${{ secrets.BUTLER_API_KEY }}
           CHANNEL: web
           ITCH_GAME: ${{ secrets.ITCHIO_GAME }}
           ITCH_USER: ${{ secrets.ITCHIO_USERNAME }}
